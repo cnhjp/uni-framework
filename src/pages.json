@@ -51,7 +51,8 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "首页"
-      }
+      },
+      "needLogin": true
     },
     {
       "path": "pages/about/about",
@@ -59,7 +60,8 @@
       "style": {
         "navigationBarTitleText": "关于",
         "navigationStyle": "custom"
-      }
+      },
+      "needLogin": true
     },
     {
       "path": "pages/login/index",
@@ -74,7 +76,8 @@
       "type": "page",
       "style": {
         "navigationBarTitleText": "我的"
-      }
+      },
+      "needLogin": true
     },
     {
       "path": "pages/mine/about/index",

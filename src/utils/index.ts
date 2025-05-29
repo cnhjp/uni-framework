@@ -131,7 +131,10 @@ export const getAllPages = (key = 'needLogin') => {
  * 得到所有的需要登录的 pages，包括主包和分包的
  * 只得到 path 数组
  */
-export const getNeedLoginPages = (): string[] => getAllPages('needLogin').map((page) => page.path)
+export const getNeedLoginPages = (): string[] => [
+  ...getAllPages('needLogin').map((page) => page.path),
+  '/',
+]
 
 /**
  * 得到所有的需要登录的 pages，包括主包和分包的

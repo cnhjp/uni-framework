@@ -19,6 +19,7 @@
         <text class="text-red-500">菲鸽</text>
       </view>
       <view class="test-css">测试 scss 样式</view>
+      <TestComp />
       <RequestComp />
       <UploadComp />
     </view>
@@ -28,6 +29,7 @@
 <script lang="ts" setup>
 import RequestComp from './components/request.vue'
 import UploadComp from './components/upload.vue'
+import TestComp from './components/test.vue'
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
