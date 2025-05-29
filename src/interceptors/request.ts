@@ -57,13 +57,77 @@ const httpInterceptor = {
       options.header.Authorization = `Bearer ${token}`
     }
   },
+
+  // 拦截成功返回
+  success(
+    response: UniApp.RequestSuccessCallbackResult | UniApp.UploadFileSuccessCallbackResult,
+    options: CustomRequestOptions,
+  ) {
+    // 假设后端返回的数据结构为 { code: number, msg: string, data: any }
+    const res = response.data as any // 根据实际后端返回类型调整
+    const { statusCode } = response
+
+    // HTTP 状态码非 2xx
+    if (statusCode < 200 || statusCode >= 300) {
+      if (!options.hideErrorToast) {
+        uni.showToast({
+          title: res?.msg || `请求失败: ${statusCode}`,
+          icon: 'none',
+        })
+      }
+      // 返回一个 rejected Promise，以便在调用处捕获错误
+      return Promise.reject(response)
+    }
+
+    // 假设后端业务状态码非成功 (例如 401 表示未登录)
+    // 请根据实际后端返回的业务状态码进行判断
+    if (res?.code && res.code !== 200) {
+      // 假设 200 表示成功
+      if (!options.hideErrorToast) {
+        uni.showToast({
+          title: res.msg || '请求错误',
+          icon: 'none',
+        })
+      }
+      // 如果是未登录 (假设 code 为 401)，可以进行跳转登录页等操作
+      if (res.code === 401) {
+        const userStore = useUserStore()
+        userStore.removeUserInfo() // 清除用户信息
+        // TODO: 跳转到登录页
+        // uni.navigateTo({ url: '/pages/login/login' })
+      }
+      // 返回一个 rejected Promise
+      return Promise.reject(response)
+    }
+
+    // 请求成功，返回数据
+    return response
+  },
+
+  // 拦截失败返回 (网络错误等)
+  fail(error, options: CustomRequestOptions) {
+    debugger
+    if (!options.hideErrorToast) {
+      uni.showToast({
+        title: error?.errMsg || '网络错误，请稍后重试',
+        icon: 'none',
+      })
+    }
+    // 返回一个 rejected Promise
+    return Promise.reject(error)
+  },
+
+  // 请求完成无论成功失败
+  // complete(options) {
+  //   console.log('请求完成', options)
+  // },
 }
 
 export const requestInterceptor = {
   install() {
     // 拦截 request 请求
-    uni.addInterceptor('request', httpInterceptor)
+    uni.addInterceptor('request', httpInterceptor as any)
     // 拦截 uploadFile 文件上传
-    uni.addInterceptor('uploadFile', httpInterceptor)
+    uni.addInterceptor('uploadFile', httpInterceptor as any)
   },
 }

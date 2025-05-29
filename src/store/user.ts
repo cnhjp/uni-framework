@@ -95,6 +95,7 @@ export const useUserStore = defineStore(
       wxLogin,
       getUserInfo,
       logout,
+      removeUserInfo,
     }
   },
   {
