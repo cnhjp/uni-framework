@@ -9,14 +9,14 @@
 
 <template>
   <view>
-    <wd-button @click="gotoLogin">跳转到登录页</wd-button>
+    <wd-button @click="gotoDemo">跳转到demo页</wd-button>
   </view>
 </template>
 
 <script setup lang="ts">
-function gotoLogin() {
+function gotoDemo() {
   uni.navigateTo({
-    url: '/pages/login/index',
+    url: '/pages/demo/index',
   })
 }
 </script>

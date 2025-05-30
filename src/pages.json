@@ -11,7 +11,8 @@
     "custom": {
       "^fg-(.*)": "@/components/fg-$1/fg-$1.vue",
       "^wd-(.*)": "wot-design-uni/components/wd-$1/wd-$1.vue",
-      "^(?!z-paging-refresh|z-paging-load-more)z-paging(.*)": "z-paging/components/z-paging$1/z-paging$1.vue"
+      "^(?!z-paging-refresh|z-paging-load-more)z-paging(.*)": "z-paging/components/z-paging$1/z-paging$1.vue",
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
     }
   },
   "tabBar": {
@@ -51,8 +52,7 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "首页"
-      },
-      "needLogin": true
+      }
     },
     {
       "path": "pages/about/about",
@@ -60,8 +60,11 @@
       "style": {
         "navigationBarTitleText": "关于",
         "navigationStyle": "custom"
-      },
-      "needLogin": true
+      }
+    },
+    {
+      "path": "pages/demo/index",
+      "type": "json5"
     },
     {
       "path": "pages/login/index",
@@ -76,8 +79,7 @@
       "type": "page",
       "style": {
         "navigationBarTitleText": "我的"
-      },
-      "needLogin": true
+      }
     },
     {
       "path": "pages/mine/about/index",
