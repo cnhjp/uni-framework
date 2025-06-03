@@ -106,7 +106,6 @@ const httpInterceptor = {
 
   // 拦截失败返回 (网络错误等)
   fail(error, options: CustomRequestOptions) {
-    debugger
     if (!options.hideErrorToast) {
       uni.showToast({
         title: error?.errMsg || '网络错误，请稍后重试',

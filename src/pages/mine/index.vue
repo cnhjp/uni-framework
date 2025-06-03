@@ -1,4 +1,4 @@
-<route lang="json5">
+<route lang="json5" type="page">
 {
   style: {
     navigationBarTitleText: '我的',

@@ -17,5 +17,10 @@ export function addItem(params: { id: string; name: string }) {
 
 // 上传附件
 export function uploadAttachment(params) {
-  return http.post('/upload', params)
+  return http.upload('http://localhost:3000/upload', params)
+}
+
+// 下载附件
+export function downloadAttachment(filename: string) {
+  return http.download(`http://localhost:3000/download/${filename}`)
 }

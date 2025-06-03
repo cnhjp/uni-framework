@@ -1,6 +1,8 @@
-<route type="json5">
+<route lang="json5" type="page">
 {
-
+  style: {
+    navigationBarTitleText: '演示页面',
+  },
 }
 </route>
 
@@ -14,14 +16,17 @@
       </view>
     </view>
 
+    <uni-badge text="1"></uni-badge>
+
     <h1>获取items</h1>
-    <uni-button @click="getList">点击</uni-button>
+    <!-- <uni-button @click="getList">点击</uni-button> -->
 
     <h1>新增item</h1>
-    <uni-button @click="addListItem">点击</uni-button>
+    <!-- <uni-button @click="addListItem">点击</uni-button> -->
 
     <h1>上传附件</h1>
-    <uni-file-picker
+    <wd-upload :file-list="fileList" image-mode="aspectFill" @change="select"></wd-upload>
+    <!-- <uni-file-picker
       v-model="fileList"
       fileMediatype="all"
       mode="grid"
@@ -29,13 +34,17 @@
       @progress="progress"
       @success="success"
       @fail="fail"
-    />
+    /> -->
     {{ fileList }}
+
+    <h1>下载附件</h1>
+    <wd-button @click="downloadFile">点击</wd-button>
+    <uni-button @click="downloadFile">点击</uni-button>
   </view>
 </template>
 
 <script setup lang="ts">
-import { getItems, deleteItem, addItem, uploadAttachment } from '@/service/demo'
+import { getItems, deleteItem, addItem, uploadAttachment, downloadAttachment } from '@/service/demo'
 
 const items = ref([])
 
@@ -86,7 +95,8 @@ function addListItem() {
 const fileList = ref([])
 function select(file) {
   console.log('select', file)
-  uploadAttachment({ file: file.tempFiles[0].file })
+  const data = { file: file.tempFiles[0].file }
+  uploadAttachment(data)
 }
 function progress(e) {
   console.log('progress', e)
@@ -96,5 +106,24 @@ function success(e) {
 }
 function fail(e) {
   console.log('fail', e)
+}
+
+// 下载
+function downloadFile() {
+  downloadAttachment('ak.png')
+    .then((res) => {
+      console.log('下载成功:', res)
+      uni.showToast({
+        title: '下载成功',
+        icon: 'success',
+      })
+    })
+    .catch((err) => {
+      console.error('下载失败:', err)
+      uni.showToast({
+        title: '下载失败',
+        icon: 'none',
+      })
+    })
 }
 </script>
