@@ -16,17 +16,19 @@
       </view>
     </view>
 
+    <uni-calendar />
+
     <uni-badge text="1"></uni-badge>
 
     <h1>获取items</h1>
-    <!-- <uni-button @click="getList">点击</uni-button> -->
+    <!-- <button @click="getList">点击</button> -->
 
     <h1>新增item</h1>
-    <!-- <uni-button @click="addListItem">点击</uni-button> -->
+    <!-- <button @click="addListItem">点击</button> -->
 
     <h1>上传附件</h1>
     <wd-upload :file-list="fileList" image-mode="aspectFill" @change="select"></wd-upload>
-    <!-- <uni-file-picker
+    <uni-file-picker
       v-model="fileList"
       fileMediatype="all"
       mode="grid"
@@ -34,12 +36,12 @@
       @progress="progress"
       @success="success"
       @fail="fail"
-    /> -->
+    />
     {{ fileList }}
 
     <h1>下载附件</h1>
     <wd-button @click="downloadFile">点击</wd-button>
-    <uni-button @click="downloadFile">点击</uni-button>
+    <button size="mini" @click="downloadFile">点击</button>
   </view>
 </template>
 
